@@ -2,13 +2,18 @@
 
     <PropertyGroup>
         <OutputType>WinExe</OutputType>
-        <TargetFramework>net5.0-windows</TargetFramework>
-        <Nullable>enable</Nullable>
+        <TargetFramework>net48</TargetFramework>
+        <Nullable>disable</Nullable>
         <UseWPF>true</UseWPF>
     </PropertyGroup>
 
     <ItemGroup>
       <ProjectReference Include="..\Playground.Core\Playground.Core.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Prism.Unity" Version="8.1.97" />
+      <PackageReference Include="Prism.Wpf" Version="8.1.97" />
     </ItemGroup>
 
 </Project>
