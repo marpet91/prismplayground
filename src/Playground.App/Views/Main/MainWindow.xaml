@@ -3,23 +3,131 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:mvvm="http://prismlibrary.com/"
-        xmlns:main="clr-namespace:Playground.App.Views.Main" d:DataContext="{d:DesignInstance Type=main:MainWindowViewModel}"
-        mvvm:ViewModelLocator.AutoWireViewModel="True"
+        xmlns:prism="http://prismlibrary.com/"
+        xmlns:main="clr-namespace:Playground.App.Views.Main"
+        d:DataContext="{d:DesignInstance Type=main:MainWindowViewModel}"
+        prism:ViewModelLocator.AutoWireViewModel="True"
         mc:Ignorable="d"
-        Title="{Binding Title}" Height="450" Width="800">
-    
+        Title="{Binding Title}"
+        Height="1024" Width="600" 
+        WindowStyle="{Binding WindowStyle}"
+        ResizeMode="NoResize"
+        Background="Transparent" 
+        WindowStartupLocation="CenterScreen"
+        >
+    <!-- WindowStyle="None" -->
     <Window.Resources>
         <Style TargetType="TabItem">
             <Setter Property="Header" Value="{Binding DataContext.Title}" />
         </Style>
     </Window.Resources>
     
-    <DockPanel LastChildFill="True">
-        <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" Margin="5" >
-            <Button Command="{Binding NavigateCommand}" CommandParameter="ViewA" Margin="5">Navigate to View A</Button>
-            <Button Command="{Binding NavigateCommand}" CommandParameter="ViewB" Margin="5">Navigate to View B</Button>
-        </StackPanel>
-        <TabControl mvvm:RegionManager.RegionName="ContentRegion" Margin="5"  />
-    </DockPanel>
+    <Border Background="#FF5F5F5F">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            
+            <TextBlock Text="Bed Temp: 0°/0°"
+                       Grid.Row="0"
+                       Grid.Column="0"
+                       VerticalAlignment="Center" 
+                       HorizontalAlignment="Center"
+                       Foreground="White"
+                       FontSize="14"/>
+
+            <TextBlock Text="FullNozzleTemp"
+                       Grid.Row="0"
+                       Grid.Column="1"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       Foreground="White"
+                       FontSize="14"/>
+
+            <TextBlock Text="ConnectionText"
+                       Grid.Row="0"
+                       Grid.Column="2"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       Foreground="White"
+                       FontSize="14"/>
+            
+            <Border Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Margin="10,0,10,10">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition Height="100"/>
+                    </Grid.RowDefinitions>
+
+                    <RadioButton Content="PRINT"
+                                 Grid.Row="1"
+                                 FontSize="14"
+                                 Foreground="White"
+                                 Grid.Column="0"
+                                 IsChecked="True"
+                                 Style="{StaticResource MenueButtonTheme}"
+                                 Command="{Binding PrintViewCommand}"
+                                 />
+                    
+
+                    <RadioButton Content="HANDMODE"
+                                 Grid.Row="1"
+                                 FontSize="14"
+                                 Foreground="White"
+                                 Grid.Column="1"
+                                 Style="{StaticResource MenueButtonTheme}"
+                                 Command="{Binding HandModeViewCommand}"
+                                 />
+                    
+
+                    <RadioButton Content="FILL / UNFILL"
+                                 Grid.Row="1"
+                                 FontSize="14"
+                                 Foreground="White"
+                                 Grid.Column="2"
+                                 Style="{StaticResource MenueButtonTheme}"
+                                 />
+                    
+
+                    <RadioButton Content="MORE"
+                                 Grid.Row="1"
+                                 FontSize="14"
+                                 Foreground="White"
+                                 Grid.Column="3"
+                                 Style="{StaticResource MenueButtonTheme}"/>
+
+                    <Border Grid.Row="0"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="4">
+
+                        <ContentControl prism:RegionManager.RegionName="ContentRegion"/>
+
+                    </Border>
+
+                    
+
+                </Grid>
+            </Border>
+            
+        </Grid>    
+    </Border>
+    <!-- <DockPanel LastChildFill="True"> -->
+    <!--     <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" Margin="5" > -->
+    <!--         <Button Command="{Binding NavigateCommand}" CommandParameter="ViewA" Margin="5">Navigate to View A</Button> -->
+    <!--         <Button Command="{Binding NavigateCommand}" CommandParameter="ViewB" Margin="5">Navigate to View B</Button> -->
+    <!--     </StackPanel> -->
+    <!--     <TabControl mvvm:RegionManager.RegionName="ContentRegion" Margin="5"  /> -->
+    <!-- </DockPanel> -->
 </Window>

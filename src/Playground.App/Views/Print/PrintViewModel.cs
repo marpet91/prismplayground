@@ -1,12 +1,12 @@
 ﻿using Prism.Mvvm;
 using Prism.Regions;
 
-namespace Playground.App.Views.ViewA
+namespace Playground.App.Views.Print
 {
-    public class ViewAViewModel : BindableBase, INavigationAware
+    public class PrintViewModel : BindableBase, INavigationAware
     {
         #region MvvmBindings
-        private string _title = "View A";
+        private string _title = "Print View";
 
         public string Title
         {

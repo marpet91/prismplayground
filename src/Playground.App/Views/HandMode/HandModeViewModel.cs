@@ -1,12 +1,12 @@
 ﻿using Prism.Mvvm;
 using Prism.Regions;
 
-namespace Playground.App.Views.ViewB
+namespace Playground.App.Views.HandMode
 {
-    public class ViewBViewModel : BindableBase, INavigationAware
+    public class HandModeViewModel : BindableBase, INavigationAware
     {
         #region MvvmBindings
-        private string _title = "View B";
+        private string _title = "Hand Mode View";
 
         public string Title
         {

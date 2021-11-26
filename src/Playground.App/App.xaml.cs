@@ -2,8 +2,8 @@
 using System.Reflection;
 using System.Windows;
 using Playground.App.Views.Main;
-using Playground.App.Views.ViewA;
-using Playground.App.Views.ViewB;
+using Playground.App.Views.Print;
+using Playground.App.Views.HandMode;
 using Prism.Ioc;
 using Prism.Mvvm;
 using Prism.Regions;
@@ -18,10 +18,17 @@ namespace Playground.App
     {
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            containerRegistry.RegisterForNavigation<ViewA>();
-            containerRegistry.RegisterForNavigation<ViewB>();
+            containerRegistry.RegisterForNavigation<PrintView>();
+            containerRegistry.RegisterForNavigation<HandModeView>();
         }
-        
+
+        protected override void OnInitialized()
+        {
+            base.OnInitialized();
+            var regionManager = Container.Resolve<IRegionManager>();
+            regionManager.RequestNavigate(GlobalDefinitions.ContentRegion, nameof(PrintView));
+        }
+
         protected override void ConfigureViewModelLocator()
         {
             base.ConfigureViewModelLocator();
@@ -30,7 +37,15 @@ namespace Playground.App
             {
                 var viewName = viewType.FullName;
                 var viewAssemblyName = viewType.GetTypeInfo().Assembly.FullName;
-                var viewModelName = $"{viewName}ViewModel, {viewAssemblyName}";
+                string viewModelName;
+                if (viewName.EndsWith("View"))
+                {
+                    viewModelName = $"{viewName}Model, {viewAssemblyName}";
+                }
+                else
+                {
+                    viewModelName = $"{viewName}ViewModel, {viewAssemblyName}";
+                }
                 return Type.GetType(viewModelName);
             });
         }
